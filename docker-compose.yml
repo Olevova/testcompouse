@@ -19,4 +19,4 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - selenium-hub
-      restart: "no" 
+    restart: "no" 
