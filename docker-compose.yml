@@ -18,5 +18,3 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: ["./npm run test"]  # Замініть цю команду на виконання вашого тесту
-    tty: true  # Додайте цей параметр для інтерактивного режиму та завершення контейнера
