@@ -2,9 +2,10 @@ version: "3"
 services:
   selenium-hub:
     image: selenium/standalone-chrome:latest
-    # image: seleniarm/standalone-chromium:latest - its image for IOS
     ports:
       - "4444:4444"
+    depends_on:
+      - test-runner
 
   html-server:
     image: nginx:alpine
@@ -17,6 +18,5 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    depends_on:
-      - selenium-hub
-    restart: "no" 
+    command: ["./npm run test"]  # Замініть цю команду на виконання вашого тесту
+    tty: true  # Додайте цей параметр для інтерактивного режиму та завершення контейнера
