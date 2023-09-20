@@ -18,4 +18,3 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      command: ["./simpleTest.js"] 
