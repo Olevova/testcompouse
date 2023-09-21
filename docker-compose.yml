@@ -10,11 +10,9 @@ services:
       - ./html:/usr/share/nginx/html
     ports:
       - "8080:80"
-
   test-runner:
     build:
       context: .
       dockerfile: Dockerfile
     depends_on:
       - selenium-hub
-    command: ["sh", "-c", "npm run test && docker-compose down"]
