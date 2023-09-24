@@ -12,17 +12,17 @@ describe("api simple test ", () => {
   
   beforeEach(async () => {
 
-    await waitOn({
-      resources: ["http://selenium-hub:4444"],
-      timeout: 10000,
-    });
+    // await waitOn({
+    //   resources: ["http://selenium-hub:4444"],
+    //   timeout: 10000,
+    // });
   
     const options = new chrome.Options();
     options.addArguments("--incognito");
     
     driver = await new Builder()
       .forBrowser("chrome")
-      .usingServer("http://selenium-hub:4444")
+      .usingServer("http://selenium-hub:4444/wd/hub"")
       .setChromeOptions(options)
       .build();
 
