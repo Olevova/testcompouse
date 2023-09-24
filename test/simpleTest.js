@@ -12,10 +12,10 @@ describe("api simple test ", () => {
   
   beforeEach(async () => {
 
-    // await waitOn({
-    //   resources: ["http://selenium-hub:4444"],
-    //   timeout: 10000,
-    // });
+    await waitOn({
+      resources: ["http://selenium-hub:4444"],
+      timeout: 10000,
+    });
   
     const options = new chrome.Options();
     options.addArguments("--incognito");
