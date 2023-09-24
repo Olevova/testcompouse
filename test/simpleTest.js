@@ -22,7 +22,7 @@ describe("api simple test ", () => {
     
     driver = await new Builder()
       .forBrowser("chrome")
-      .usingServer("http://selenium-hub:4444/wd/hub")
+      .usingServer("http://selenium-hub:4444")
       .setChromeOptions(options)
       .build();
 
