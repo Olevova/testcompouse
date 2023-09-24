@@ -1,40 +1,28 @@
 version: "3"
 services:
   selenium-hub:
-    image: selenium/hub:4.12.1-20230920
-    container_name: selenium-hub
+    image: selenium/standalone-chrome:latest
     ports:
-      - "4442:4442"
-      - "4443:4443"
       - "4444:4444"
-  chrome:
-    image: selenium/node-chrome:4.12.1-20230920
-    shm_size: 2gb
-    depends_on:
-      - selenium-hub
-    environment:
-      - SE_EVENT_BUS_HOST=selenium-hub
-      - SE_EVENT_BUS_PUBLISH_PORT=4444
-      - SE_EVENT_BUS_SUBSCRIBE_PORT=4444
-  chrome_video:
-    image: selenium/video:ffmpeg-4.3.1-20230920
-    volumes:
-      - /tmp/videos:/videos
-    depends_on:
-      - chrome
-    environment:
-      - DISPLAY_CONTAINER_NAME=chrome
-      - FILE_NAME=chrome_video.mp4
+
   html-server:
     image: nginx:alpine
     volumes:
       - ./html:/usr/share/nginx/html
     ports:
       - "8080:80"
+  video-recorder:  # Новий сервіс для запису відео
+    image: selenium/video:ffmpeg-4.3.1-20230904  # Використовуйте відповідний образ
+    volumes:
+      - /tmp/videos:/videos  # Маппінг директорії для зберігання відео
+    depends_on:
+      - selenium-hub  # Залежність від selenium-hub
+    environment:
+      FILE_NAME: my_video.mp4  # Опціонально: вказання імені відеофайлу
+
   test-runner:
     build:
       context: .
       dockerfile: Dockerfile
     depends_on:
       - selenium-hub
-    command: ["npm", "run", "test"]
